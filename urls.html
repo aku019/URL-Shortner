@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>URL Shortner</title>
+		<link rel="icon" type="image/png" href="https://i.imgur.com/P5A06kx.png" />
+
+		<style type="text/css">
+			body {
+				min-height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+
+			main {
+				width: 100%;
+				flex: 1 0 auto;
+			}
+
+			footer {
+				width: 100%;
+			}
+
+			div.card-panel {
+				margin-top: 16px;
+			}
+
+			form {
+				padding: 16px;
+			}
+
+			.top-redishorts {
+				padding: 16px;
+			}
+		</style>
+
+		<!--Import Google Icon Font-->
+		<link
+			href="https://fonts.googleapis.com/icon?family=Material+Icons"
+			rel="stylesheet"
+		/>
+		<!-- Compiled and minified CSS -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+		/>       
+		<!--Let browser know website is optimized for mobile-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body>
+		<main>
+			<div class="container">  
+				<div class="row">
+					<div class="col s12 offset-m2 m8 offset-l3 l6 card-panel hoverable">
+						<form id="form_url_short" action="">
+							<div style="padding-bottom: 8px;">
+								<h5>
+									<i class="material-icons">short_text</i> URL Shortner
+								</h5>
+							</div>
+							<div class="input-field">
+								<i class="material-icons prefix">link</i>            
+								<input type="url" id="inp_url" placeholder="Long URL">
+								<!-- <label for="inp_url">Long url</label> -->
+							</div>
+							<div class="right-align">
+								<button
+									class="btn-small waves-effect waves-light"
+									type="submit" 
+								>
+									Shorten
+									<i class="material-icons right">send</i>
+								</button>
+							</div>
+
+							
+							<div id="result" ></div>
+						</form> 
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s12 offset-m2 m8 offset-l3 l6 card-panel hoverable">
+						<div class="top-redishorts">
+							<div style="padding-bottom: 8px;">
+								<h5><i class="material-icons">thumb_up</i> Top Links</h5>
+							</div>
+
+							
+							<div id="result_top-redishorts" ></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+
+		<footer class="page-footer">
+			<div class="container">
+				<div class="row">
+					<div class="col m8 s12">
+						<h4 class="white-text">URL Shortner</h4>
+						<p class="grey-text text-lighten-4 flow-text">
+							<!-- Made with <i class="material-icons">favorite</i> by Asish Kumar Updadhyay -->
+						</p>
+					</div>
+					<div class="col m3 offset-m1 s12">
+						<h5 class="white-text">Links</h5>
+						<ul>
+							<li>
+								<h6>
+									<a
+										class="grey-text text-lighten-3"
+										href="https://github.com/aku019"
+										target="_blank"
+										><i class="fab fa-github"></i> Github</a
+									>
+								</h6>
+							</li>
+							<li>
+								<h6>
+									<a
+										class="grey-text text-lighten-3"
+										href="https://www.linkedin.com/in/asish-kumar-upadhyay-971478142/"
+										target="_blank"
+										><i class="fab fa-linkedin"></i> Linkedin</a
+									>
+								</h6>
+							</li>
+							<li>
+								<h6>
+									<a
+										class="grey-text text-lighten-3"
+										href="https://twitter.com/AsishkumarUpad2"
+										target="_blank"
+										><i class="fab fa-twitter"></i> Twitter</a
+									>
+								</h6>
+							</li>
+							<li>
+								<h6>
+									<a
+										class="grey-text text-lighten-3"
+										href="https://www.facebook.com/asishkrupadhyay/"
+										target="_blank"
+										><i class="fab fa-facebook"></i> Facebook</a
+									>
+								</h6>
+							</li>
+							<li>
+								<h6>
+									<a
+										class="grey-text text-lighten-3"
+										href="https://drive.google.com/file/d/1h5Sj2p5vPX53avlZoQFIfAl8eGnzPioz/view"
+										target="_blank"
+										><i class="fas fa-file"></i> Resume</a
+									>
+								</h6>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+<script>
+    
+    document.getElementById("form_url_short").addEventListener("submit", shortenUrl);
+        function shortenUrl(e) {
+            e.preventDefault();
+            document.getElementById("result").innerHTML="";
+            document.getElementById("result").innerHTML="Hey you";
+
+					
+						};
+
+</script>
+
+    </body>
+    </html>
