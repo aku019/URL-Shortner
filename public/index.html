@@ -359,7 +359,7 @@
 							res2.addEventListener('click',() => {
                        const copyText = `${document.location.origin}` +'/u/'+ hashUrl;
 					   navigator.clipboard.writeText(copyText).then(function() {
-						alert(`Copied the text: ${document.location.origin} +'/u/'+ hashUrl`);
+						alert(`Copied the text`);
                    }, function(err) {
 					alert(`Copy failed`);
                       });
@@ -384,7 +384,8 @@
                 function longUrl(e) {
 					e.preventDefault();
                     divResult2.innerHTML = "";
-                    let url = new URL('/api/urls/', 'http://localhost:3000');
+					const local_url=document.location.origin;
+                    let url = new URL('/api/urls/', local_url);
                     //inpUrl2
                     const param = { id: inpUrl2.value };
     //                 Object.keys(param).forEach((key) => {
