@@ -13,6 +13,8 @@
 				align-items: center;
 			}
 
+			
+
 			main {
 				width: 100%;
 				flex: 1 0 auto;
@@ -30,12 +32,13 @@
 				padding: 16px;
 			}
 
-			.top-redishorts {
+			.top {
 				padding: 16px;
 			}
 
            
 		</style>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
 		<!--Import Google Icon Font-->
 		<link
@@ -52,6 +55,7 @@
 	</head>
 	<body>
 		<main>
+		
 			<div class="container">  
 				<div class="row">
 					<div class="col s12 offset-m2 m8 offset-l3 l6 card-panel hoverable">
@@ -81,16 +85,34 @@
 
 							
 							<div id="result" ></div>
-                            <div class="left-align" >
+                            <!-- <div class="left-align" >
 								<button
 									class="btn-small waves-effect waves-light"
-									type="button" 
-                                    id="btn"
+									type="reset" 
 								>
 									Copy
-									<i class="material-icons right">send</i>
+									<i class="material-icons right">content_copy</i>
 								</button>
-							</div>
+							</div> -->
+							<div class="left-align" >
+								<!-- <div > -->
+									<!-- <i class="fa fa-facebook icon"></i>  -->
+									<!-- <i class="material-icons right">content_copy</i> -->
+							<div class="btn-small waves-effect waves-light">
+							<input
+							type="button" id="btns2"
+								
+								value="Copy" class=" waves-light"
+								
+								
+							>
+							<i class="material-icons right">content_copy</i>
+						</div>
+								
+								
+							<!-- </button> -->
+						<!-- </div> -->
+						</div>
 						</form> 
 					</div>
 				</div>
@@ -105,52 +127,76 @@
 							</div>
 							<div class="input-field">
 								<i class="material-icons prefix">link</i>            
-								<input id="inp_url2" placeholder="Long URL">
+								<input id="inp_url2" placeholder="Short URL">
 								<!-- <label for="inp_url">Long url</label> -->
 							</div>
 							<div class="right-align">
 								<button
 									class="btn-small waves-effect waves-light"
 									type="submit" 
+                                    
 								>
-									Shorten
+									Get Long Url
 									<i class="material-icons right">send</i>
 								</button>
 							</div>
-                            <div class="left-align" >
-								<button
-									class="btn-small waves-effect waves-light"
-									type="button" 
-                                    id="btn2"
-								>
-									Copy
-									<i class="material-icons right">send</i>
-								</button>
-							</div>
+                            <div id="result2" ></div>
+
+							<div class="left-align" >
+								<!-- <div > -->
+									<!-- <i class="fa fa-facebook icon"></i>  -->
+									<!-- <i class="material-icons right">content_copy</i> -->
+							<div class="btn-small waves-effect waves-light">
+							<input
+							type="button" id="btns"
+								
+								value="Copy" class=" waves-light"
+								
+								
+							>
+							<i class="material-icons right">content_copy</i>
+						</div>
+								
+								
+							<!-- </button> -->
+						<!-- </div> -->
+						</div>
+                        
+                            
 
 							
-							<div id="result2" ></div>
+							
 						</form> 
+						
+						
 					</div>
 				</div>
+
+               
 
                
     
                    
 				<div class="row">
 					<div class="col s12 offset-m2 m8 offset-l3 l6 card-panel hoverable">
-						<div class="top-redishorts">
+						<div class="top">
 							<div style="padding-bottom: 8px;">
-								<h5><i class="material-icons">thumb_up</i> Top Links</h5>
+								<h5><i class="material-icons">history</i>History</h5>
 							</div>
 
 							
 							<div id="result_top-redishorts" ></div>
+
 						</div>
 					</div>
 				</div>
+
+
 			</div>
+			
+
 		</main>
+
 
 		<footer class="page-footer">
 			<div class="container">
@@ -232,6 +278,42 @@
 				const shortLoad = document.getElementById("loading-short");
 				const topShortLoad = document.getElementById("loading-top-short");
 				const resultTopRedis = document.getElementById("result_top-redishorts");
+                const res = document.getElementById("btns");
+				const res2 = document.getElementById("btns2");
+				fetch('/api/urls').
+                then(response => response.json())
+                .then(
+                users=>{
+                const usersElement =document.querySelector('#result_top-redishorts');
+				//const ele=document.createElement('div');
+				// ele.innerHTML="Log url";
+               // usersElement.appendChild(ele);
+				
+                users.forEach(user => {
+                   const element=document.createElement('div');
+                    console.log(user);
+					let hashUrl = user.id;
+							// if (hash.shortUrl !== "*")
+							// 	hashUrl = window.location.host + "/" + hash.shortUrl;
+
+							// Hide the progress bar
+							// shortLoad.classList.add("hide");
+							// Append the short url into the page
+
+							const resultHtml = `<h6 class="truncate">Long url: <a href="${user.long_url}" target="_blank">${user.long_url}</a></h6><h6>Short url: <a href="${
+								`${document.location.origin}` +'/u/'+ hashUrl
+							}" target="_blank">${
+								`${document.location.origin}` +'/u/'+ hashUrl
+							}</a></h6>\n`;
+                    element.innerHTML=resultHtml;
+                    usersElement.appendChild(element);
+
+
+            
+        });
+
+    
+});
 
 
 				// Get the short url for the input url and display both
@@ -267,18 +349,33 @@
 							// Append the short url into the page
 
 							const resultHtml = `<h6 class="truncate">Long url: <a href="${url}" target="_blank">${url}</a></h6><h6>Short url: <a href="${
-								`${document.location.origin}` +'/api/urls/'+ hashUrl
-							}" target="_blank">${hashUrl}</a></h6>`;
+								`${document.location.origin}` +'/u/'+ hashUrl
+							}" target="_blank">${
+								`${document.location.origin}` +'/u/'+ hashUrl
+							}</a></h6>`;
 
 							divResult.innerHTML = resultHtml;
                             inpUrl.value = "";
-                            document.getElementById("btn").addEventListener('click', () => {
-
-                      const copyText = document.querySelector('#result');
-                       copyText.select();
-                       document.execCommand('copy');
-                       alert(`Copied the text: ${copyText.innerHTML}`);
+							res2.addEventListener('click',() => {
+                       const copyText = `${document.location.origin}` +'/u/'+ hashUrl;
+					   navigator.clipboard.writeText(copyText).then(function() {
+						alert(`Copied the text: ${document.location.origin} +'/u/'+ hashUrl`);
+                   }, function(err) {
+					alert(`Copy failed`);
+                      });
+                    //    copyText.select();
+                    //    document.execCommand('copy');
+                    //    alert(`Copied the text: ${longurl}`);
+                    //    divResult2.innerHTML="00";
+                  
                 });
+                //             document.getElementById("bt").addEventListener('click', () => {
+
+                //       const copyText = document.querySelector('#result');
+                //        copyText.select();
+                //        document.execCommand('copy');
+                //        alert(`Copied the text: ${copyText.innerHTML}`);
+                // });
 
 							// Clear the input
 							
@@ -294,7 +391,8 @@
     //     url.append(key, param[key]);
     // });
     // url.search = new URLSearchParams(param).toString();
-    url=url+inpUrl2.value;
+	const len=document.location.origin.length;
+    url=url+inpUrl2.value.substring(len+3);
     console.log(url);
     fetch(url)
         .then((response) => response.json())
@@ -303,7 +401,21 @@
                 const shorturl = json.id;
                 const longurl = json.long_url;
                 console.log(json);
-                divResult2.innerHTML =longurl;
+                const resultHtml = `<h6 class="truncate">Long url: <a href="${longurl}" target="_blank">${longurl}</a></h6>`
+                divResult2.innerHTML =resultHtml;
+                res.addEventListener('click',() => {
+                       const copyText = `${longurl}`;//document.getElementById("result2");
+					   navigator.clipboard.writeText(copyText).then(function() {
+						alert(`Copied the text: ${longurl}`);
+                   }, function(err) {
+					alert(`Copy failed`);
+                      });
+                    //    copyText.select();
+                    //    document.execCommand('copy');
+                    //    alert(`Copied the text: ${longurl}`);
+                    //    divResult2.innerHTML="00";
+                  
+                });
                 
                 
             
@@ -324,6 +436,7 @@
 				
 
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
 
     </body>
     </html>

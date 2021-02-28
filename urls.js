@@ -8,11 +8,12 @@ const router=express.Router();
 const port = process.env.PORT || 3000;
 
 
-urls={};
+const { urls }= require('./urls_data.js');
 router.get('/',(req,res) => {
     const urlList =[];
-    Object.keys(urls).forEach(urlId =>{
-        urlList.push({id:urlId, long_url: urls[urlId].long_url});
+    Object.keys(urls).forEach(id =>{
+        // console.log(urls[id].long_url);
+        urlList.push({id:id, long_url:urls[id]});
     })
     res.send(urlList);
 
@@ -22,11 +23,8 @@ router.post('/',(req,res) => {
     const long_url= req.body.long_url;
     const id=shortid.generate();
     urls[id]=long_url;
-    
        res.status(201).send({id});
-   
-
-    });
+});
 
 router.get('/:id',(req,res)=>{
     const {id}  = req.params;
@@ -40,6 +38,10 @@ router.get('/:id',(req,res)=>{
     } else {
         res.status(404).send('url shortener id not found');
     }
+
+    
+    
+
 
 
 // const id=req.params.id;
