@@ -19,13 +19,25 @@
 const express = require('express');
 const api = require('./api');
 const { urls }= require('./urls_data.js');
+const MongoStore = require('connect-mongo');
+const db = require('./db');
+require('dotenv').config();
+db.connect({
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
+}).then(()=>{
+  console.log("Connected to DB");
+});
  const router=express.Router();
-
+ 
 // const api= require('./api');
 const app = express();
 const port =process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+
 
 
 // ...
