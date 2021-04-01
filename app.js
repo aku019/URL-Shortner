@@ -21,6 +21,7 @@ const api = require('./api');
 const { urls }= require('./urls_data.js');
 const MongoStore = require('connect-mongo');
 const db = require('./db');
+// const URL = require('./models/urls_db');
 require('dotenv').config();
 db.connect({
   host: process.env.DB_HOST,
@@ -54,18 +55,37 @@ app.use(express.static('public'));
 app.listen(port, () => {
   console.log(`Server listening at port: ${port}`)
 });
-
+const URL = require('./models/urls_db');
 app.get('/u/:id',(req,res)=>{
   console.log("hey hey");
-  const response = urls[req.params.id];
+  var response;
+  const id= req.params.id;
+  URL.findOne( {id:id} ).then(url => {
+    // console.log(url);
+    if(url)
+    res.redirect(url.urls);
+    else
+    res.status(404).send();
+    
+           
+    
+    
+
+});
+//console.log(response);
 //  const response = req.params.id;
-  console.log(urls);
-  console.log(req.params.id);
- if( response)
- {
-   res.redirect(response);
- }
-   else
-   res.status(404).send();
+  //console.log(urls);
+  //console.log(req.params.id);
+//  if( response)
+//  {
+//   console.log(response);
+//  //  res.redirect(response);
+//  }
+   //else
+  // res.status(404).send();
+
+
+
+
  
 });
