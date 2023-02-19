@@ -182,14 +182,10 @@ router.get('/:id',(req,res)=>{
 router.get('/try/:id',(req,res)=>{
     const {id}  = req.params;////+"$"+req.params.b;
     console.log(id);
-   // const item = ty[req.params];
-//    const len=ty.length;
+  
    var found=0;
     ty.forEach(item =>{
-       // console.log(item);
-        //const x=item.a+"$"+item.b;
-        //console.log(x);
-
+     
         if(item.id==id)
        {
            found=1;
